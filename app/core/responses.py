@@ -12,11 +12,11 @@ class SuccessResponse(BaseModel, Generic[T]):
 
 class RecipeReadResponse(BaseModel):
     message: str = "OK"
-    recipe: RecipeRead
+    recipe: list[RecipeRead]   # tests assert recipe.be.a('Array')
 
 class RecipeCreateResponse(BaseModel):
     message: str = "OK"
-    recipe: RecipeReadAfterCreate
+    recipe: list[RecipeReadAfterCreate]  # tests assert recipe.be.a('Array')
 
 class PaginatedResponse(BaseModel, Generic[T]):
     success: bool = True
@@ -27,7 +27,7 @@ class PaginatedResponse(BaseModel, Generic[T]):
     page_size: int
 
 class RecipesResponse(BaseModel, Generic[T]):
-    recipe: list[T]
+    recipes: list[T]   # GET all: tests check res.body.recipes (plural)
 
 class ErrorResponse(BaseModel):
     success: bool = False
@@ -45,18 +45,20 @@ def paginated(data: list, total: int, page: int, page_size: int) -> dict:
     ).model_dump()
 
 def recipe_read(data: Any = None, message: str = "OK") -> dict:
+    # Wrap in list — tests assert res.body.recipe.be.a('Array').length.eql(1)
     return RecipeReadResponse(
-        recipe=data,
+        recipe=[data],
         message=message
     ).model_dump()
 
 def recipe_created(data: Any = None, message: str = "OK") -> dict:
+    # Wrap in list — tests assert res.body.recipe.be.a('Array').length.eql(1)
     return RecipeCreateResponse(
-        recipe=data,
+        recipe=[data],
         message=message
     ).model_dump()
 
 def recipes(data: list) -> dict:
     return RecipesResponse(
-        recipe=data
+        recipes=data
     ).model_dump()
