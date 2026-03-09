@@ -27,7 +27,7 @@ class PaginatedResponse(BaseModel, Generic[T]):
     page_size: int
 
 class RecipesResponse(BaseModel, Generic[T]):
-    recipes: list[T]
+    recipe: list[T]
 
 class ErrorResponse(BaseModel):
     success: bool = False
@@ -58,5 +58,5 @@ def recipe_created(data: Any = None, message: str = "OK") -> dict:
 
 def recipes(data: list) -> dict:
     return RecipesResponse(
-        recipes=data
+        recipe=data
     ).model_dump()
