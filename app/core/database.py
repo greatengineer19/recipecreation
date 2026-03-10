@@ -4,7 +4,7 @@ from sqlalchemy.orm import DeclarativeBase, sessionmaker
 from app.core.config import settings
 
 engine = create_engine(
-    settings.DATABASE_URL,
+    settings.db_url,
     pool_pre_ping=True,   # drops stale connections (important for Neon/Railway)
     pool_recycle=300,
 )
