@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
@@ -38,6 +40,7 @@ def integrity_error_handler(request: Request, exc: IntegrityError) -> JSONRespon
 
 
 def generic_exception_handler(request: Request, exc: Exception) -> JSONResponse:
+    logging.exception("[500] Unhandled exception on %s %s", request.method, request.url)
     return JSONResponse(
         status_code=500,
         content=ErrorResponse(message="Internal server error.").model_dump(),
