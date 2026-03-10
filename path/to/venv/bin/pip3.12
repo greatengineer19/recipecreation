@@ -1,4 +1,4 @@
-#!/Users/runchise-andrew/Documents/SelfProjects/fastapi-app/path/to/venv/bin/python3.12
+#!/Users/runchise-andrew/Documents/SelfProjects/recipecreation/path/to/venv/bin/python3.12
 # -*- coding: utf-8 -*-
 import re
 import sys

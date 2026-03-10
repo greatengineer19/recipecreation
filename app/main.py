@@ -3,6 +3,7 @@ from fastapi.exceptions import RequestValidationError
 from sqlalchemy.exc import IntegrityError
 
 from app.api.v1.router import api_router
+from app.core.database import Base, engine
 from app.core.error_handlers import (
     app_exception_handler,
     generic_exception_handler,
@@ -11,6 +12,11 @@ from app.core.error_handlers import (
 )
 from app.core.exceptions import AppException
 
+# Import all models so Base.metadata knows about them before create_all
+import app.models.recipe  # noqa: F401
+import app.models.item    # noqa: F401
+
+
 def create_app() -> FastAPI:
     app = FastAPI(
         title="FastAPI Starter",
@@ -18,6 +24,9 @@ def create_app() -> FastAPI:
         docs_url="/docs",
         redoc_url="/redoc",
     )
+
+    # ── Create tables on startup ─────────────────────────────────────────────
+    Base.metadata.create_all(bind=engine)
 
     # ── Exception handlers ───────────────────────────────────────────────────
     app.add_exception_handler(AppException, app_exception_handler)

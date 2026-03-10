@@ -9,7 +9,7 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-setenv VIRTUAL_ENV "/Users/runchise-andrew/Documents/SelfProjects/fastapi-app/path/to/venv"
+setenv VIRTUAL_ENV "/Users/runchise-andrew/Documents/SelfProjects/recipecreation/path/to/venv"
 
 set _OLD_VIRTUAL_PATH="$PATH"
 setenv PATH "$VIRTUAL_ENV/bin:$PATH"

@@ -12,7 +12,7 @@ def create_recipe(
     making_time="15 min",
     serves="3 people",
     ingredients="onion, tomato, seasoning",
-    cost="450" ):
+    cost=450 ):
     return client.post(BASE + "/", json={
         "title": title,
         "making_time": making_time,
@@ -37,12 +37,12 @@ def test_create_recipe(client):
     assert response.status_code == 200
     data = response.json()
 
-    created_at = data["recipe"]["created_at"]
-    updated_at = data["recipe"]["updated_at"]
+    created_at = data["recipe"][0]["created_at"]
+    updated_at = data["recipe"][0]["updated_at"]
 
     assert data == {
         'message': 'Recipe successfully created!',
-        'recipe': {
+        'recipe': [{
             'cost': 450,
             'created_at': created_at,
             'id': 1,
@@ -50,7 +50,7 @@ def test_create_recipe(client):
             'making_time': '15 min',
             'serves': '3 people',
             'title': 'Fried Rice',
-            'updated_at': updated_at}
+            'updated_at': updated_at}]
     }
 
 

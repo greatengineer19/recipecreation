@@ -6,6 +6,7 @@ psycopg[binary]==3.2.3
 pydantic==2.10.6
 pydantic-settings==2.7.0
 python-dotenv==1.0.1
+psycopg2-binary>=2.9
 
 # testing
 pytest==8.2.2
